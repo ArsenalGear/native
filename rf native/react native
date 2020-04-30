@@ -1,0 +1,43 @@
+expo init react-native-rf
+
+ cd react-native-rf
+- yarn start # you can open iOS, Android, or web from here, or run them directly with the commands below.
+- yarn android
+- yarn ios # requires an iOS device or access to a macOS for a simulator
+- yarn web
+
+exp://192.168.1.83:19000
+
+To run the app with live reloading, choose one of:
+  • Scan the QR code above with the Expo app (Android) or the Camera app (iOS).
+  • Press a for Android emulator, or w to run on web.
+  • Press e to send a link to your phone with email.
+  • Press s to sign in and enable more options.
+
+ Expo  Press ? to show a list of all available commands.
+
+ https://docs.expo.io/workflow/android-studio-emulator/
+
+ nano ~/.bash_profile
+
+ настроить sdk в андроид студио для эмулятора
+ настроить эмулятор при входе в андроид студио avd manager
+
+ sudo apt install qemu-kvm
+ sudo adduser <username> kvm
+ https://www.youtube.com/watch?v=-ZKNmJFTOAk
+
+ const styles = StyleSheet.create({ StyleSheet - класс со статическим метом create
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+view = div
+
+создаем Navbar.js
+создаем Addtodo.js
+создаем Todo.js
