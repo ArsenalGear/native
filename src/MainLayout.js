@@ -1,37 +1,20 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Alert} from 'react-native';
-// подключение шрифтов с установкой библиотеки expo fonts
-import * as Font from 'expo-font'
-import {AppLoading} from 'expo'
-import {THEME} from "./src/theme";
+import React, {useState, useContext} from 'react'
+import {Navbar} from "./components/Navbar";
+import {Alert, View} from "react-native";
+import {MainScreen} from "./screens/MainScreen";
+import {TodoScreen} from "./screens/TodoScreen";
+import {TodoContext} from "./context/todo/todoContext";
 
-import {Navbar} from "./src/components/Navbar";
-import {MainScreen} from "./src/screens/MainScreen";
-import {TodoScreen} from "./src/screens/TodoScreen";
-
-async function loadApplication() {
-	// возвращение промиса
-	await Font.loadAsync({
-		'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
-		'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
-	})
-}
-
-export default function App() {
-	const [todos, setTodos] = useState([
-		{id: '1', title: 'выучить React Native'}
-		// {id: '2', title: 'написать приложение '},
-	])
-	const [todoId, setTodoId] = useState(null)
-	const [isReady, setIsReady] = useState(false)
+export const MainLayout = () => {
+	// экспорт value={{
+	// 	// экспорт контекста
+	// 	todos: state.todos
+	// }} из src/context/todo/todoState
+	const todoContext = useContext(TodoContext)
 	
-	if (!isReady) {
-		// передача асинхронных функций для загрузки шрифтов
-		return <AppLoading
-			onFinish={()=> setIsReady(true)}
-			onError={err => console.log(err)}
-			startAsync={loadApplication}/>
-	}
+	const [todos, setTodos] = useState([])
+	// выбранный экран
+	const [todoId, setTodoId] = useState(null)
 	
 	const addTodo = (title) => {
 		//22222 параметр title мы получаем из формы <AddTodo onSubmit={addTodo}/>
@@ -54,10 +37,12 @@ export default function App() {
 		
 		//получаем предущее значение и добавляем новое
 		// //333333333 prev - это предыдущее состояние массива todos если первый раз то просто []
-		setTodos(prev => [...prev, {
-			id: Date.now().toString(),
-			title: title
-		}])//это короткая запись (так создается элемент todo и добавление в конец state)
+		setTodos(prev => [...prev,
+			{
+				id: Date.now().toString(),
+				title: title
+			}
+		])//это короткая запись (так создается элемент todo и добавление в конец state)
 	}
 	
 	const removeTodo = id => {
@@ -115,7 +100,10 @@ export default function App() {
 			// }}
 			//
 			openTodo={setTodoId}
-			todos={todos} addTodo={addTodo} removeTodo={removeTodo}/>
+			// todos={todos} по скольку есть этот ключ todos
+			todos={todoContext.todos}
+			addTodo={addTodo}
+			removeTodo={removeTodo}/>
 	)
 	
 	if (todoId) {
@@ -144,33 +132,5 @@ export default function App() {
 			{/*<Text style={styles.text }>Open up App.js to start working on y </Text>*/}
 			{/*<Text style={{color: 'green'}}>Open up App.js to start working on your аapp1231231!</Text>*/}
 		</View>
-	);
+	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		paddingHorizontal: THEME.PADDING_HORIZONTAL,
-		// paddingVertical: 20,
-		marginBottom: 15,
-		// flex: 1, //вся доступная высота экрана
-		// // height: 300,
-		// // flexDirection: 'column',
-		// backgroundColor: 'white',
-		// alignItems: 'flex-start',
-		// justifyContent: 'center',
-	},
-	
-	text: {
-		// color: 'brown',
-		// fontSize: 26
-	},
-	
-	flat: {
-		// overflow: 'hidden',
-		// flex: 2
-		// color: 'brown',
-		// fontSize: 26
-		// height: 'auto',
-	},
-	
-});

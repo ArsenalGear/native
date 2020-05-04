@@ -41,3 +41,5 @@ view = div
 создаем Navbar.js
 создаем Addtodo.js
 создаем Todo.js
+
+app.json - меняем ориентацию
