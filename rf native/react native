@@ -43,3 +43,10 @@ view = div
 создаем Todo.js
 
 app.json - меняем ориентацию
+
+https://console.firebase.google.com/u/0/?hl=ru&pli=1
+
+Или выберите Realtime Database
+пустить в тестовом режиме
+
+адрес бд https://rn-todo-app-15daf.firebaseio.com/

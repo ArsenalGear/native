@@ -14,6 +14,13 @@ export const EditModal = ({visible, onCancel, value, onSave}) => {
 			onSave(title)
 		}
 	}
+	
+	// читстка стейта при отмене изменений на старый тайтл
+	const cancelHandler = () => {
+		setTitle(value)
+		onCancel()
+	}
+	
 	return (
 		<Modal visible={visible} animationType="slide"
 			// прозрачность
@@ -32,7 +39,7 @@ export const EditModal = ({visible, onCancel, value, onSave}) => {
 				{/*передача функции вверх для вызова*/}
 				<View style={styles.buttons}>
 					
-					<AppButton color={THEME.DANGER_COLOR} onPress={onCancel}>Отменить</AppButton>
+					<AppButton color={THEME.DANGER_COLOR} onPress={cancelHandler}>Отменить</AppButton>
 					<AppButton onPress={saveHandler}> Сохранить </AppButton>
 				</View>
 			
